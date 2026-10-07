@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f5f1ea" />
+    <meta
+      name="description"
+      content="Find your rhythm with Stillblocks, a calm falling-blocks game you play with your keyboard."
+    />
+    <title>Stillblocks — a little room to play</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f5f1ea'/%3E%3Cpath d='M6 6h9v9H6zm11 0h9v9h-9zm0 11h9v9h-9z' fill='%23b95436'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./" aria-label="Stillblocks home"
+        ><span class="brand-mark" aria-hidden="true">✳</span> stillblocks<span
+          class="brand-dot"
+          >.</span
+        ></a
+      ><span class="header-note">A LITTLE ROOM TO PLAY</span
+      ><button
+        id="help-toggle"
+        class="quiet"
+        aria-expanded="false"
+        aria-controls="help"
+      >
+        How to play <kbd>?</kbd>
+      </button>
+    </header>
+    <main>
+      <section class="intro">
+        <div class="eyebrow"><span></span> THE QUIET ARCADE</div>
+        <h1>One block.<br />One breath.<br /><em>One more.</em></h1>
+        <p>Let the blocks fall.<br />Find a little order in the chaos.</p>
+        <div class="intro-rule"></div>
+        <div class="controls">
+          <h2>Your keyboard is the controller.</h2>
+          <div>
+            <span><kbd>←</kbd><kbd>→</kbd></span
+            ><span>Move</span>
+          </div>
+          <div>
+            <span><kbd>↑</kbd></span
+            ><span>Rotate</span>
+          </div>
+          <div>
+            <span><kbd>↓</kbd></span
+            ><span>Soft drop</span>
+          </div>
+          <div>
+            <span><kbd class="wide">space</kbd></span
+            ><span>Drop into place</span>
+          </div>
+          <div>
+            <span><kbd>P</kbd></span
+            ><span>Take a pause</span>
+          </div>
+        </div>
+        <p class="small-note">No rush. Just a keyboard and you.</p>
+      </section>
+      <section class="play-section" aria-label="Falling blocks game">
+        <div class="board-top">
+          <span id="state-label">READY WHEN YOU ARE</span
+          ><span class="board-coordinate">10 × 20</span>
+        </div>
+        <div class="board-frame">
+          <canvas
+            tabindex="0"
+            id="board"
+            width="600"
+            height="1200"
+            aria-label="Ten-column, twenty-row falling blocks playfield. Use arrow keys to move and rotate, space to drop."
+            >Falling blocks game requires a browser with canvas support.</canvas
+          >
+          <div id="overlay" class="overlay">
+            <span id="overlay-icon" class="overlay-mark" aria-hidden="true"
+              >✳</span
+            >
+            <h2 id="overlay-title">Find your rhythm.</h2>
+            <p id="overlay-copy">
+              Make space. Clear lines.<br />See how far you can go.
+            </p>
+            <button id="primary" class="primary">
+              Let's play <kbd>enter</kbd>
+            </button>
+            <p id="overlay-hint" class="overlay-hint">
+              A keyboard is all you need.
+            </p>
+          </div>
+          <div id="clear-label" aria-hidden="true"></div>
+        </div>
+        <div class="board-bottom">
+          <span
+            ><span class="ghost-swatch"></span>Outline shows your landing</span
+          ><button id="pause" class="quiet" disabled>Pause <kbd>P</kbd></button>
+        </div>
+      </section>
+      <aside class="stats">
+        <div class="score">
+          <h2>YOUR SCORE</h2>
+          <div id="score">00000</div>
+          <p id="score-note">Every line is a fresh start.</p>
+        </div>
+        <div class="mini-stats">
+          <div>
+            <h2>LEVEL</h2>
+            <span id="level">01</span>
+          </div>
+          <div>
+            <h2>LINES</h2>
+            <span id="lines">00</span>
+          </div>
+        </div>
+        <div class="next">
+          <h2>UP NEXT</h2>
+          <canvas
+            id="next"
+            width="360"
+            height="360"
+            aria-label="Next three falling pieces"
+          ></canvas>
+        </div>
+        <div class="tip">
+          <span aria-hidden="true">✧</span>
+          <p>
+            Leave room for the long one.<br />Your future self will thank you.
+          </p>
+        </div>
+        <button id="restart" class="quiet restart">
+          Start fresh <kbd>R</kbd>
+        </button>
+      </aside>
+    </main>
+    <footer>
+      <span>Small pieces. Endless possibilities.</span
+      ><span>MADE FOR A MOMENT OF FOCUS</span>
+    </footer>
+    <dialog id="help">
+      <div class="help-header">
+        <h2>A little orientation.</h2>
+        <button id="help-close" class="quiet" aria-label="Close help">
+          Close <kbd>Esc</kbd>
+        </button>
+      </div>
+      <p>
+        Fill a horizontal row to clear it. Keep the stack below the top. Every
+        10 cleared lines brings a quicker rhythm.
+      </p>
+      <dl>
+        <div>
+          <dt>← / →</dt>
+          <dd>Move left or right</dd>
+        </div>
+        <div>
+          <dt>↑ / X</dt>
+          <dd>Rotate clockwise</dd>
+        </div>
+        <div>
+          <dt>Z</dt>
+          <dd>Rotate counterclockwise</dd>
+        </div>
+        <div>
+          <dt>↓</dt>
+          <dd>Soft drop · 1 point per cell</dd>
+        </div>
+        <div>
+          <dt>Space</dt>
+          <dd>Hard drop · 2 points per cell</dd>
+        </div>
+        <div>
+          <dt>P / Esc</dt>
+          <dd>Pause or resume</dd>
+        </div>
+        <div>
+          <dt>Enter</dt>
+          <dd>Start or resume</dd>
+        </div>
+        <div>
+          <dt>R</dt>
+          <dd>Start fresh (confirm with Enter)</dd>
+        </div>
+      </dl>
+      <p>
+        Clear 1 / 2 / 3 / 4 lines for 100 / 300 / 500 / 800 points × your level.
+        Use Tab to reach every button.
+      </p>
+    </dialog>
+    <div
+      id="announcement"
+      class="sr-only"
+      role="status"
+      aria-live="polite"
+    ></div>
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>
